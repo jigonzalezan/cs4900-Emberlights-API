@@ -1,0 +1,25 @@
+{
+    "version": "1.0.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "off-the-charts [H2]",
+            "request": "launch",
+            "mainClass": "com.emberlights.offthecharts.OffTheChartsApplication",
+            "projectName": "off-the-charts",
+            // noDebug will display a warning but it is still accepted as of Oct. 2026
+            "noDebug": true,
+            "vmArgs": "-Dspring.profiles.active=h2"
+        },
+        {
+            "type": "java",
+            "name": "off-the-charts [MariaDB]",
+            "request": "launch",
+            "mainClass": "com.emberlights.offthecharts.OffTheChartsApplication",
+            "projectName": "off-the-charts",
+            // noDebug will display a warning but it is still accepted as of Oct. 2026
+            "noDebug": true,
+            "vmArgs": "-Dspring.profiles.active=mariadb"
+        },
+    ]
+}

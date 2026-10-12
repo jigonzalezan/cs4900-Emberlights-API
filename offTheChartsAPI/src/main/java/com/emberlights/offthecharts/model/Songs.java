@@ -9,16 +9,22 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.time.LocalTime;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
 @Entity
+@Table(name = "Songs")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Songs {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "songID", nullable = false)
-  int songID;
+  Integer songID;
 
   @Column(name = "songName", length = 100, nullable = false)
   String songName;
@@ -32,7 +38,7 @@ public class Songs {
 
   @JoinColumn(name = "albumID", nullable = false)
   @ManyToOne
-  int albumID;
+  Albums album;
 
   @ManyToMany
   @JoinTable(

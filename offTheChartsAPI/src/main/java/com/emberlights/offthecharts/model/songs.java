@@ -1,10 +1,7 @@
 package com.emberlights.offthecharts.model;
 
-import java.time.Instant;
+import com.emberlights.offthecharts.model.*;
 import java.time.LocalTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SourceType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,6 +40,6 @@ public class songs {
     @ManyToOne
     albums album;
     
-    @ManyToMany (mappedBy = "songs")
+    @ManyToMany (mappedBy = "song")
     playlists[] playlist;
 }

@@ -1,6 +1,7 @@
 package com.emberlights.offthecharts.model;
 
 import java.time.Instant;
+import com.emberlights.offthecharts.model.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SourceType;
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -42,6 +44,7 @@ public class playlists {
     @JoinTable(name = "playlist_songs", joinColumns = 
         @JoinColumn (name = "playlistID", referencedColumnName = "playlistID"),
         inverseJoinColumns = @JoinColumn (name = "songID", referencedColumnName = "songID"))
+    @ManyToMany
     songs[] song;
 
 }

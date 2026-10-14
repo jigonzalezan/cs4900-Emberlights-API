@@ -13,16 +13,17 @@ public class SongService {
 
   private final SongRepository songRepository;
 
-  public List<Songs> getSongs(String songName) {
-    if (songName == null || songName.isBlank()) {
-      return songRepository.findAll();
-    }
-    return songRepository.findBySongName(songName);
+  public List<Songs> getAllSongs() {
+    return songRepository.findAll();
   }
 
   public Songs getSongById(Integer id) throws EntityNotFoundException {
     return songRepository
         .findById(id)
         .orElseThrow(() -> new EntityNotFoundException("Song (" + id + ") not found"));
+  }
+
+  public List<Songs> searchSongs(String songName) {
+    return songRepository.findBySongName(songName);
   }
 }

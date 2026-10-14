@@ -11,8 +11,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalTime;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -40,10 +42,11 @@ public class Songs {
   @ManyToOne
   Albums album;
 
+  @EqualsAndHashCode.Exclude
   @ManyToMany
   @JoinTable(
       name = "PlaylistSongs",
       joinColumns = @JoinColumn(name = "songID", referencedColumnName = "songID"),
       inverseJoinColumns = @JoinColumn(name = "playlistID", referencedColumnName = "playlistID"))
-  Playlists[] playlist;
+  Set<Playlists> playlist;
 }

@@ -10,8 +10,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -38,6 +40,7 @@ public class Playlists {
   @Column(name = "numberSongs", nullable = false)
   Integer numberSongs;
 
+  @EqualsAndHashCode.Exclude
   @ManyToMany(mappedBy = "playlist")
-  Songs[] songs;
+  Set<Songs> songs;
 }

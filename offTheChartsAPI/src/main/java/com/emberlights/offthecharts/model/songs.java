@@ -6,38 +6,47 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalTime;
+import java.util.Set;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "Songs")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Songs {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int songID;
+  @Column(name = "songID", nullable = false)
+  Integer songID;
 
-  @Column(name = "songName", nullable = false, length = 100)
-  private String songName;
+  @Column(name = "songName", length = 100, nullable = false)
+  String songName;
+
+  @JoinColumn(name = "genreID", nullable = false)
+  @ManyToOne
+  Genres genre;
 
   @Column(name = "songDuration", nullable = false)
   LocalTime songDuration;
 
-  @Column(name = "numberSongs", nullable = false)
-  private int numberSongs;
-
   @JoinColumn(name = "albumID", nullable = false)
-  @ManyToOne
-  Genres genre;
-
-  @JoinColumn(name = "genreID", nullable = false)
   @ManyToOne
   Albums album;
 
-  @ManyToMany(mappedBy = "song")
-  Playlists[] playlist;
+  @EqualsAndHashCode.Exclude
+  @ManyToMany
+  @JoinTable(
+      name = "PlaylistSongs",
+      joinColumns = @JoinColumn(name = "songID", referencedColumnName = "songID"),
+      inverseJoinColumns = @JoinColumn(name = "playlistID", referencedColumnName = "playlistID"))
+  Set<Playlists> playlist;
 }

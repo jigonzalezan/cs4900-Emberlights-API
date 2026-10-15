@@ -13,6 +13,7 @@ import org.mapstruct.Mapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +29,12 @@ public class AlbumController {
   ResponseEntity<List<AlbumDto>> getAllAlbums() {
     return new ResponseEntity<>(
         albumDtoMapper.toDtoList(albumService.getAllAlbums()), HttpStatus.OK);
+  }
+
+  @GetMapping(path = "{id}")
+  ResponseEntity<AlbumDto> getAlbumById(@PathVariable int id) {
+    return new ResponseEntity<>(
+      albumDtoMapper.toDto(albumService.getAlbumById(id)), HttpStatus.OK
+    );
   }
 }

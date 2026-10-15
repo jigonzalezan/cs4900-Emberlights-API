@@ -1,6 +1,8 @@
 package com.emberlights.offthecharts.model;
 
 import java.time.LocalTime;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Song")
+@Table(name = "Songs")
 public class Songs
 {
 
@@ -41,8 +43,8 @@ public class Songs
     @ManyToMany 
     @JoinTable 
     (
-        name = "playlistSongs",
+        name = "PlaylistSongs",
         joinColumns = @JoinColumn(name = "songId", referencedColumnName = "songID"),
         inverseJoinColumns = @JoinColumn(name = "playlistId", referencedColumnName = "playlistID")
     )
-    Playlist[] playlist;}
+    List<Playlist> playlist;}

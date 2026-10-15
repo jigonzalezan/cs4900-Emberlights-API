@@ -1,6 +1,8 @@
 package com.emberlights.offthecharts.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Playlist")
+@Table(name = "Playlists")
 public class Playlist
 {
 
@@ -37,5 +39,5 @@ public class Playlist
     Genres genre;
 
     @ManyToMany(mappedBy = "playlist")
-    Songs[] songs;
+    List<Songs> songs;
 }

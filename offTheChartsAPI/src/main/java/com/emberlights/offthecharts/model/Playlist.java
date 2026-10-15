@@ -20,8 +20,8 @@ public class Playlist
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "albumID", nullable = false)
-    Integer albumID;
+    @Column(name = "playlistID", nullable = false)
+    Integer playlistID;
 
     @Column(name = "playlistName", length = 50, nullable = false)
     String playlistName;
@@ -33,7 +33,7 @@ public class Playlist
     Integer numberSongs;
 
     @ManyToOne
-    @JoinColumn(name = "genreID", nullable = false)
+    @JoinColumn(name = "genreID", nullable = false, referencedColumnName = "genreID")
     Genres genre;
 
     @ManyToMany(mappedBy = "playlist")

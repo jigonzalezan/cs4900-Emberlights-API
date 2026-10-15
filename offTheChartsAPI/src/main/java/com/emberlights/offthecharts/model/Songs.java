@@ -31,19 +31,18 @@ public class Songs
     LocalTime songDuration;
 
     @ManyToOne 
-    @JoinColumn(name = "genreId", nullable = false)
+    @JoinColumn(name = "genreId", nullable = false, referencedColumnName = "genreID")
     Genres genres;
 
     @ManyToOne 
-    @JoinColumn(name = "albumId", nullable = false)
+    @JoinColumn(name = "albumId", nullable = false, referencedColumnName = "albumID")
     Albums albums;
 
     @ManyToMany 
     @JoinTable 
     (
         name = "playlistSongs",
-        joinColumns = @JoinColumn(name = "songId"),
-        inverseJoinColumns = @JoinColumn(name = "playlistId")
+        joinColumns = @JoinColumn(name = "songId", referencedColumnName = "songID"),
+        inverseJoinColumns = @JoinColumn(name = "playlistId", referencedColumnName = "playlistID")
     )
-    Playlist[] playlist;
-}
+    Playlist[] playlist;}

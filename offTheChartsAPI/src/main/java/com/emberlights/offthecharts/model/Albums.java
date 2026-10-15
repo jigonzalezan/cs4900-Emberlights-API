@@ -25,5 +25,4 @@ public class Albums
 
     @Column(name = "artistName", length = 60, nullable = false)
     String artistName;
-    
 }

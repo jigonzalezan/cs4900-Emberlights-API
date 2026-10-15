@@ -10,18 +10,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "albums")
-public class albums {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int albumID;
+@Table(name = "Albums")
+public class Albums {
 
-    @Column (name = "albumName", nullable = false, length = 100)
-    private String albumName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int albumID;
 
-    @Column (name = "artistName", nullable = false, length = 60)
-    private String artistName;
+  @Column(name = "albumName", nullable = false, length = 100)
+  private String albumName;
 
-    
+  @Column(name = "artistName", nullable = false, length = 60)
+  private String artistName;
 }

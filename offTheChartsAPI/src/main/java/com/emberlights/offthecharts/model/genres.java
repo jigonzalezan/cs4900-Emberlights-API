@@ -10,14 +10,13 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "genres")
-public class genres {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int genreID;
+@Table(name = "Genres")
+public class Genres {
 
-    @Column (name = "genreName", nullable = false, length = 50)
-    private String genreName;
-    
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int genreID;
+
+  @Column(name = "genreName", nullable = false, length = 50)
+  private String genreName;
 }

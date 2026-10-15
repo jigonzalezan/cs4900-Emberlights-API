@@ -6,17 +6,21 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "Genres")
 public class Genres {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int genreID;
+  @Column(name = "genreID", nullable = false)
+  Integer genreID;
 
-  @Column(name = "genreName", nullable = false, length = 50)
-  private String genreName;
+  @Column(name = "genreName", length = 50, nullable = false)
+  String genreName;
 }

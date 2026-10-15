@@ -6,20 +6,24 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "Albums")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Albums {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int albumID;
+  @Column(name = "albumID", nullable = false)
+  Integer albumID;
 
-  @Column(name = "albumName", nullable = false, length = 100)
-  private String albumName;
+  @Column(name = "albumName", length = 100, nullable = false)
+  String albumName;
 
-  @Column(name = "artistName", nullable = false, length = 60)
-  private String artistName;
+  @Column(name = "artistName", length = 60, nullable = false)
+  String artistName;
 }

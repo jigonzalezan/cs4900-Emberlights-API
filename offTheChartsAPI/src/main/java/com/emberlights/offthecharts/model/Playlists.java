@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Playlists")
-public class Playlist
+public class Playlists
 {
 
     @Id
@@ -36,7 +36,7 @@ public class Playlist
 
     @ManyToOne
     @JoinColumn(name = "genreID", nullable = false, referencedColumnName = "genreID")
-    Genres genre;
+    Genres genres;
 
     @ManyToMany(mappedBy = "playlist")
     List<Songs> songs;

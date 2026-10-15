@@ -47,4 +47,4 @@ public class Songs
         joinColumns = @JoinColumn(name = "songId", referencedColumnName = "songID"),
         inverseJoinColumns = @JoinColumn(name = "playlistId", referencedColumnName = "playlistID")
     )
-    List<Playlist> playlist;}
+    List<Playlists> playlist;}

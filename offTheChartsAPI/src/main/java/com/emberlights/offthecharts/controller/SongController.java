@@ -37,4 +37,10 @@ public class SongController {
     return new ResponseEntity<>(
         songDtoMapper.toDtoList(songService.searchSongs(songName)), HttpStatus.OK);
   }
+
+  @GetMapping(path = "random")
+  ResponseEntity<SongDto> randomSongByGenre(@RequestParam(required = true) String genreName) {
+    return new ResponseEntity<>(
+        songDtoMapper.toDto(songService.getRandomSongByGenre(genreName)), HttpStatus.OK);
+  }
 }

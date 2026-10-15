@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SongRepository extends JpaRepository<Songs, Integer> {
-  List<Songs> findBySongName(String songName);
+  List<Songs> findBySongNameContaining(String songName);
+
+  List<Songs> findByGenreGenreName(String genreName);
 }

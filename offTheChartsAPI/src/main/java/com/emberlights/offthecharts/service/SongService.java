@@ -4,6 +4,7 @@ import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.repository.SongRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
+import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,16 @@ public class SongService {
   }
 
   public List<Songs> searchSongs(String songName) {
-    return songRepository.findBySongName(songName);
+    return songRepository.findBySongNameContaining(songName);
+  }
+
+  public Songs getRandomSongByGenre(String genreName) {
+    List<Songs> allSongs = songRepository.findByGenreGenreName(genreName);
+    Random random = new Random();
+    int randomIndex = random.nextInt(allSongs.size());
+
+    Songs randomSong = allSongs.get(randomIndex);
+
+    return randomSong;
   }
 }

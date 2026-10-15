@@ -29,4 +29,8 @@ public class AlbumService {
             HttpStatus.NOT_FOUND, "Album not found: " + id)
         );
     }
+
+    public List<Albums> searchAlbums(String albumName) {
+        return albumRepository.findByAlbumName(albumName);
+    }
 }

@@ -1,5 +1,7 @@
 package com.emberlights.offthecharts.service;
 
+import com.emberlights.offthecharts.dto.SongDto;
+import com.emberlights.offthecharts.mapper.SongDtoMapper;
 import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.repository.SongRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class SongService {
 
   private final SongRepository songRepository;
+  private final SongDtoMapper songDtoMapper;
 
   public List<Songs> getAllSongs() {
     return songRepository.findAll();
@@ -36,5 +39,9 @@ public class SongService {
     Songs randomSong = allSongs.get(randomIndex);
 
     return randomSong;
+  }
+
+  public Songs createSong(SongDto songDTO) throws EntityNotFoundException {
+    return songRepository.saveAndFlush(songDtoMapper.toEntity(songDTO));
   }
 }

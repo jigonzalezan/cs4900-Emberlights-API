@@ -8,7 +8,7 @@ import lombok.Value;
 @Data
 @Value
 public class AlbumDto {
-  int albumID;
+  Integer albumID;
   String albumName;
   String artistName;
 }

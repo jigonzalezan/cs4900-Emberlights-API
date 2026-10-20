@@ -10,18 +10,14 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Set;
-import lombok.AllArgsConstructor;
+import java.util.List;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "Playlists")
-@AllArgsConstructor
-@NoArgsConstructor
 public class Playlists {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "playlistID", nullable = false)
@@ -30,17 +26,16 @@ public class Playlists {
   @Column(name = "playlistName", length = 50, nullable = false)
   String playlistName;
 
-  @JoinColumn(name = "genreID", nullable = false)
-  @ManyToOne
-  Genres genre;
-
   @Column(name = "creationTime", nullable = false)
   LocalDateTime creationTime;
 
   @Column(name = "numberSongs", nullable = false)
   Integer numberSongs;
 
-  @EqualsAndHashCode.Exclude
+  @ManyToOne
+  @JoinColumn(name = "genreID", nullable = false, referencedColumnName = "genreID")
+  Genres genres;
+
   @ManyToMany(mappedBy = "playlist")
-  Set<Songs> songs;
+  List<Songs> songs;
 }

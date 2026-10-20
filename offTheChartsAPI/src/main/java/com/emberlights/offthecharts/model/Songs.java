@@ -44,9 +44,6 @@ public class Songs {
 
   @EqualsAndHashCode.Exclude
   @ManyToMany
-  @JoinTable(
-      name = "PlaylistSongs",
-      joinColumns = @JoinColumn(name = "songID", referencedColumnName = "songID"),
-      inverseJoinColumns = @JoinColumn(name = "playlistID", referencedColumnName = "playlistID"))
+  @JoinTable(name = "PlaylistSongs", joinColumns = @JoinColumn(name = "songID", referencedColumnName = "songID"), inverseJoinColumns = @JoinColumn(name = "playlistID", referencedColumnName = "playlistID"))
   Set<Playlists> playlist;
 }

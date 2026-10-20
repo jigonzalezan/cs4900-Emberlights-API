@@ -7,7 +7,9 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "spring", uses = { SongService.class })
+@Mapper(
+    componentModel = "spring",
+    uses = {SongService.class})
 public interface SongDtoMapper {
   Songs toEntity(SongDto songDto) throws EntityNotFoundException;
 

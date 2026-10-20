@@ -44,4 +44,11 @@ public class SongService {
   public Songs createSong(SongDto songDTO) throws EntityNotFoundException {
     return songRepository.saveAndFlush(songDtoMapper.toEntity(songDTO));
   }
+
+  public Songs putSong(Integer id, SongDto songDto) {
+    Songs song = songRepository
+        .findById(id)
+        .orElseThrow(() -> new EntityNotFoundException("Work Order (" + ") not found"));
+    return songRepository.saveAndFlush(songDtoMapper.updateEntity(songDto, song));
+  }
 }

@@ -11,15 +11,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Genres")
-public class Genres
-{
+public class Genres {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "genreID", nullable = false)
-    Integer genreID;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "genreID", nullable = false)
+  Integer genreID;
 
-    @Column(name = "genreName", length = 50, nullable = false)
-    String genreName;
-    
+  @Column(name = "genreName", length = 50, nullable = false)
+  String genreName;
 }

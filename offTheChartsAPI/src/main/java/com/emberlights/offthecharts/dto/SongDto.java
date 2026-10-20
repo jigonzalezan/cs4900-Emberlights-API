@@ -8,11 +8,10 @@ import lombok.Value;
 @Builder
 @Data
 @Value
-public class SongDto 
-{
-    Integer songID;
-    String songName;
-    GenreDto genres;
-    LocalTime songDuration;
-    AlbumDto albums; 
+public class SongDto {
+  Integer songID;
+  String songName;
+  GenreDto genres;
+  LocalTime songDuration;
+  AlbumDto albums;
 }

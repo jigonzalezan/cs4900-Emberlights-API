@@ -7,8 +7,7 @@ import lombok.Value;
 @Builder
 @Data
 @Value
-public class GenreDto 
-{
+public class GenreDto {
   Integer genreID;
   String genreName;
 }

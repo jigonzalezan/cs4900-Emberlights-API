@@ -2,6 +2,7 @@ package com.emberlights.offthecharts.controller;
 
 import com.emberlights.offthecharts.dto.AlbumDto;
 import com.emberlights.offthecharts.mapper.AlbumDtoMapper;
+import com.emberlights.offthecharts.model.Albums;
 import com.emberlights.offthecharts.service.AlbumService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +41,13 @@ public class AlbumController {
       @RequestParam(required = false) String albumName) {
     return new ResponseEntity<>(
         albumDtoMapper.toDtoList(albumService.searchAlbums(albumName)), HttpStatus.OK);
+  }
+
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<Object> createAlbum(@RequestBody AlbumDto albumRequestDto) {
+    Albums album;
+    album = albumService.createAlbum(albumRequestDto);
+    return new ResponseEntity<>(
+        album, HttpStatus.CREATED);
   }
 }

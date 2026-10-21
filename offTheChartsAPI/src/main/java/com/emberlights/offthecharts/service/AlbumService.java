@@ -1,5 +1,7 @@
 package com.emberlights.offthecharts.service;
 
+import com.emberlights.offthecharts.dto.AlbumDto;
+import com.emberlights.offthecharts.mapper.AlbumDtoMapper;
 import com.emberlights.offthecharts.model.Albums;
 import com.emberlights.offthecharts.repository.AlbumRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,6 +17,7 @@ public class AlbumService {
 
   // AlbumRepository albumRepository = new AlbumRepository();
   private final AlbumRepository albumRepository;
+  private final AlbumDtoMapper albumDtoMapper;
 
   public List<Albums> getAllAlbums() {
     return albumRepository.findAll();
@@ -29,5 +32,9 @@ public class AlbumService {
 
   public List<Albums> searchAlbums(String albumName) {
     return albumRepository.findByAlbumName(albumName);
+  }
+
+  public Albums createAlbum(AlbumDto newAlbum) throws EntityNotFoundException{
+    return albumRepository.saveAndFlush(albumDtoMapper.toEntity(newAlbum));
   }
 }

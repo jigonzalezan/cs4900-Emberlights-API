@@ -15,4 +15,6 @@ public interface AlbumDtoMapper {
   List<AlbumDto> toDtoList(List<Albums> albumList) throws EntityNotFoundException;
 
   AlbumDto toDto(Albums albums) throws EntityNotFoundException;
+
+  Albums toEntity(AlbumDto albumDto) throws EntityNotFoundException;
 }

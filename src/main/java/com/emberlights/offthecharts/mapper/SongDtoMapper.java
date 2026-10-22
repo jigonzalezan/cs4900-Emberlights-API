@@ -19,6 +19,4 @@ public interface SongDtoMapper {
 
   List<SongDto> toDtoList(List<Songs> songList) throws EntityNotFoundException;
 
-  @InheritConfiguration
-  Songs updateEntity(SongDto songDto, @MappingTarget Songs songs) throws EntityNotFoundException;
 }

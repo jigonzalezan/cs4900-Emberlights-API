@@ -5,8 +5,10 @@ import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.service.AlbumService;
 import com.emberlights.offthecharts.service.GenreService;
 import jakarta.persistence.EntityNotFoundException;
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(
     componentModel = "spring",
@@ -17,4 +19,8 @@ public interface SongRequestDtoMapper {
   @Mapping(source = "albumID", target = "album")
   @Mapping(target = "playlist", ignore = true)
   Songs toEntity(SongRequestDto songRequestDto) throws EntityNotFoundException;
+
+  @InheritConfiguration
+  Songs updateEntity(SongRequestDto songDto, @MappingTarget Songs songs)
+      throws EntityNotFoundException;
 }

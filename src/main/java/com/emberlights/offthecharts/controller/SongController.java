@@ -63,10 +63,10 @@ public class SongController {
   }
 
   @PutMapping(path = "{id}")
-  ResponseEntity<Object> updateSong(@PathVariable Integer id, @RequestBody SongDto songDto) {
+  ResponseEntity<Object> updateSong(@PathVariable Integer id, @RequestBody SongRequestDto songRequestDto) {
     Songs song;
     try {
-      song = songService.putSong(id, songDto);
+      song = songService.putSong(id, songRequestDto);
     } catch (EntityNotFoundException e) {
       return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
     }

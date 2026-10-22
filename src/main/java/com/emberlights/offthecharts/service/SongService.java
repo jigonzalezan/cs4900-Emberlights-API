@@ -1,7 +1,8 @@
 package com.emberlights.offthecharts.service;
 
-import com.emberlights.offthecharts.dto.SongDto;
+import com.emberlights.offthecharts.dto.SongRequestDto;
 import com.emberlights.offthecharts.mapper.SongDtoMapper;
+import com.emberlights.offthecharts.mapper.SongRequestDtoMapper;
 import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.repository.SongRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,6 +17,7 @@ public class SongService {
 
   private final SongRepository songRepository;
   private final SongDtoMapper songDtoMapper;
+  private final SongRequestDtoMapper songRequestDtoMapper;
 
   public List<Songs> getAllSongs() {
     return songRepository.findAll();
@@ -41,14 +43,14 @@ public class SongService {
     return randomSong;
   }
 
-  public Songs createSong(SongDto songDTO) throws EntityNotFoundException {
-    return songRepository.saveAndFlush(songDtoMapper.toEntity(songDTO));
+  public Songs createSong(SongRequestDto songRequestDto) throws EntityNotFoundException {
+    return songRepository.saveAndFlush(songRequestDtoMapper.toEntity(songRequestDto));
   }
 
-  public Songs putSong(Integer id, SongDto songDto) {
+  public Songs putSong(Integer id, SongRequestDto songRequestDto) {
     Songs song = songRepository
         .findById(id)
         .orElseThrow(() -> new EntityNotFoundException("Work Order (" + ") not found"));
-    return songRepository.saveAndFlush(songDtoMapper.updateEntity(songDto, song));
+    return songRepository.saveAndFlush(songRequestDtoMapper.updateEntity(songRequestDto, song));
   }
 }

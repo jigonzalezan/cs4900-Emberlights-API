@@ -32,14 +32,3 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
-
-### VS Code ###
-<<<<<<< HEAD
-.vscode
-=======
-hs_err_pid4864.log
-.vscode/launch.json
-.vscode/settings.json
-src/test/java/com/example/demo/OffTheChartsApplicationTests.java
-.vscode
->>>>>>> mallia-homework-4

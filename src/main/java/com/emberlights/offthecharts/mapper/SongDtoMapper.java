@@ -5,7 +5,9 @@ import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.service.SongService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 @Mapper(
     componentModel = "spring",
@@ -16,4 +18,7 @@ public interface SongDtoMapper {
   SongDto toDto(Songs song) throws EntityNotFoundException;
 
   List<SongDto> toDtoList(List<Songs> songList) throws EntityNotFoundException;
+
+  @InheritConfiguration
+  Songs updateEntity(SongDto songDto, @MappingTarget Songs songs) throws EntityNotFoundException;
 }

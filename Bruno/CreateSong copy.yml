@@ -1,0 +1,29 @@
+info:
+  name: CreateSong copy
+  type: http
+  seq: 14
+
+http:
+  method: POST
+  url: "{{BASE_URL}}/song"
+  body:
+    type: json
+    data: |-
+      {
+        "songName": "Men I've Known and Killed",
+        "genre": {
+          "genreID": 4
+        },
+        "songDuration": "00:03:42",
+        "album": {
+          "albumID": 2
+        }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

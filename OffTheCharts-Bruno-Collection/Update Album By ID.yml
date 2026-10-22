@@ -1,0 +1,28 @@
+info:
+  name: Update Album By ID
+  type: http
+  seq: 14
+
+http:
+  method: PUT
+  url: "{{BASE_URL}}/album/{{ID}}"
+  body:
+    type: json
+    data: |-
+      {
+        "albumName": "Hail to the King",
+        "artistName": "Avenged Sevenfold"
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: ID
+      value: "15"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

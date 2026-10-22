@@ -6,11 +6,13 @@ import com.emberlights.offthecharts.service.SongService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(
     componentModel = "spring",
     uses = {SongService.class})
 public interface PlaylistsDtoMapper {
+  @Mapping(target = "songs", ignore = true)
   Playlists toEntity(PlaylistsDto playlistDto) throws EntityNotFoundException;
 
   PlaylistsDto toDto(Playlists playlist) throws EntityNotFoundException;

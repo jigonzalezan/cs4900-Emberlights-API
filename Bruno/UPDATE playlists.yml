@@ -1,0 +1,34 @@
+info:
+  name: UPDATE playlists
+  type: http
+  seq: 14
+
+http:
+  method: PUT
+  url: "{{BASE_URL}}/playlist/{{PLAYLIST_ID}}"
+  body:
+    type: json
+    data: |-
+      {
+        "playlistID": 5,
+        "playlistName": "Ultimate Rock",
+        "genres": {
+          "genreID": 1,
+          "genreName": "Rock"
+        },
+        "creationTime": "2026-10-22T08:23:24",
+        "numberSongs": 9
+      }
+  auth: inherit
+
+runtime:
+  variables:
+    - name: PLAYLIST_ID
+      value: "5"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

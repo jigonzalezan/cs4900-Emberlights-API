@@ -5,7 +5,9 @@ import com.emberlights.offthecharts.model.Playlists;
 import com.emberlights.offthecharts.service.SongService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mapping;
 
 @Mapper(
@@ -18,4 +20,8 @@ public interface PlaylistsDtoMapper {
   PlaylistsDto toDto(Playlists playlist) throws EntityNotFoundException;
 
   List<PlaylistsDto> toDtoList(List<Playlists> playlistList) throws EntityNotFoundException;
+
+  @InheritConfiguration
+  Playlists updateEntity(PlaylistsDto playlistsDto, @MappingTarget Playlists playlists)
+      throws EntityNotFoundException;
 }

@@ -2,7 +2,9 @@ package com.emberlights.offthecharts.controller;
 
 import com.emberlights.offthecharts.dto.PlaylistsDto;
 import com.emberlights.offthecharts.mapper.PlaylistsDtoMapper;
+import com.emberlights.offthecharts.model.Playlists;
 import com.emberlights.offthecharts.service.PlaylistsService;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "playlist", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PlaylistsController {
+
   private final PlaylistsDtoMapper playlistDtoMapper;
   private final PlaylistsService playlistService;
 
@@ -39,5 +45,28 @@ public class PlaylistsController {
     return new ResponseEntity<>(
         playlistDtoMapper.toDtoList(playlistService.getPlaylistBySearch(playlistName)),
         HttpStatus.OK);
+  }
+
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<Object> createPlaylist(@RequestBody PlaylistsDto playlistsDto) {
+    Playlists playlists;
+    try {
+      playlists = playlistService.createPlaylists(playlistsDto);
+    } catch (EntityNotFoundException e) {
+      return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+    }
+    return new ResponseEntity<>(playlists, HttpStatus.OK);
+  }
+
+  @PutMapping(path = "{id}")
+  ResponseEntity<Object> updatePlaylist(
+      @PathVariable Integer id, @RequestBody PlaylistsDto playlistsDto) {
+    Playlists playlists;
+    try {
+      playlists = playlistService.putPlaylists(id, playlistsDto);
+    } catch (EntityNotFoundException e) {
+      return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+    }
+    return new ResponseEntity<>(playlists, HttpStatus.OK);
   }
 }

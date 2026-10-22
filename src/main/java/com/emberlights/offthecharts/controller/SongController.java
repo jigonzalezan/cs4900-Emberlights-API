@@ -1,16 +1,13 @@
 package com.emberlights.offthecharts.controller;
 
 import com.emberlights.offthecharts.dto.SongDto;
+import com.emberlights.offthecharts.dto.SongRequestDto;
 import com.emberlights.offthecharts.mapper.SongDtoMapper;
 import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.service.SongService;
-
 import jakarta.persistence.EntityNotFoundException;
-
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties.Http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -55,10 +52,10 @@ public class SongController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<Object> createSong(@RequestBody SongDto songDTO) {
+  ResponseEntity<Object> createSong(@RequestBody SongRequestDto songRequestDto) {
     Songs song;
     try {
-      song = songService.createSong(songDTO);
+      song = songService.createSong(songRequestDto);
     } catch (EntityNotFoundException e) {
       return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
     }

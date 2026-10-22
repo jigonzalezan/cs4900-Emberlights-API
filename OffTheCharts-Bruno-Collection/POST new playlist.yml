@@ -1,0 +1,27 @@
+info:
+  name: POST new playlist
+  type: http
+  seq: 13
+
+http:
+  method: POST
+  url: "{{BASE_URL}}/playlist"
+  body:
+    type: json
+    data: |2-
+        {
+          "playlistName": "Ultimate Rock Mix the Sequel",
+          "genres": {
+            "genreID": 1,
+            "genreName": "Rock"
+          },
+          "numberSongs": 10
+        }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

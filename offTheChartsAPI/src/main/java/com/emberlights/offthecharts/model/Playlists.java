@@ -26,7 +26,7 @@ public class Playlists {
   @Column(name = "playlistName", length = 50, nullable = false)
   String playlistName;
 
-  @Column(name = "creationTime", nullable = false)
+  @Column(name = "creationTime", insertable = false, updatable = false)
   LocalDateTime creationTime;
 
   @Column(name = "numberSongs", nullable = false)

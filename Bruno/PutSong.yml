@@ -16,16 +16,9 @@ http:
       {
         "songID": 43,
         "songName": "Men I've Known and Killed",
-        "genre": {
-          "genreID": 4,
-          "genreName": "Folk"
-        },
+        "genreID": 4,
         "songDuration": "00:03:02",
-        "album": {
-          "albumID": 2,
-          "albumName": "Bones in the Ocean",
-          "artistName": "The Longest Johns"
-        }
+        "albumID": 2
       }
   auth: inherit
 

@@ -11,13 +11,9 @@ http:
     data: |-
       {
         "songName": "Men I've Known and Killed",
-        "genre": {
-          "genreID": 4
-        },
+        "genreID": 4,
         "songDuration": "00:03:42",
-        "album": {
-          "albumID": 2
-        }
+        "albumID": 2
       }
   auth: inherit
 

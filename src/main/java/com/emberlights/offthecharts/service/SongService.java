@@ -7,6 +7,7 @@ import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.repository.SongRepository;
 import com.emberlights.offthecharts.repository.SongSpecifications;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
@@ -37,12 +38,26 @@ public class SongService {
 
   public Songs getRandomSongByGenre(String genreName) {
     List<Songs> allSongs = songRepository.findByGenreGenreName(genreName);
+
+    if (allSongs == null || allSongs.isEmpty()) {
+      System.out.println("Failed to match genre of " + genreName);
+      return null;
+    }
     Random random = new Random();
     int randomIndex = random.nextInt(allSongs.size());
 
     Songs randomSong = allSongs.get(randomIndex);
 
     return randomSong;
+  }
+
+  public List<Songs> getMultiRandomSongsByGenre(String genreName, int num) {
+    List<Songs> randomList = new ArrayList(num);
+    for (int i = 0; i < num; i++) {
+      randomList.add(getRandomSongByGenre(genreName));
+    }
+
+    return randomList;
   }
 
   public Songs createSong(SongRequestDto songRequestDto) throws EntityNotFoundException {

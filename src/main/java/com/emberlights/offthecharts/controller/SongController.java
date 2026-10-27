@@ -52,6 +52,14 @@ public class SongController {
         songDtoMapper.toDto(songService.getRandomSongByGenre(genreName)), HttpStatus.OK);
   }
 
+  @GetMapping(path = "random/{num}")
+  ResponseEntity<List<SongDto>> multiRandomSongByGenre(
+      @RequestParam(required = true) String genreName, @PathVariable int num) {
+    return new ResponseEntity<>(
+        songDtoMapper.toDtoList(songService.getMultiRandomSongsByGenre(genreName, num)),
+        HttpStatus.OK);
+  }
+
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<Object> createSong(@RequestBody SongRequestDto songRequestDto) {
     Songs song;

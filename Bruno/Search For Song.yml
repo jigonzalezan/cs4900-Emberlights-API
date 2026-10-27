@@ -5,11 +5,17 @@ info:
 
 http:
   method: GET
-  url: "{{BASE_URL}}/song/search?songName=Paranoid"
-  params:
-    - name: songName
-      value: Paranoid
-      type: query
+  url: "{{BASE_URL}}/song/search"
+  body:
+    type: json
+    data: |-
+      {
+        "songID": "",
+        "songName": "Bones",
+        "genreID": 4,
+        "songDuration": "",
+        "albumID": ""
+      }
   auth: inherit
 
 settings:

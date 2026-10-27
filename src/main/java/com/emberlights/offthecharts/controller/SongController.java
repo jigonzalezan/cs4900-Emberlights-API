@@ -39,9 +39,10 @@ public class SongController {
   }
 
   @GetMapping(path = "search")
-  ResponseEntity<List<SongDto>> searchSongByName(@RequestParam(required = false) String songName) {
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<List<SongDto>> searchSongByName(@RequestBody SongRequestDto searchSong) {
     return new ResponseEntity<>(
-        songDtoMapper.toDtoList(songService.searchSongs(songName)), HttpStatus.OK);
+        songDtoMapper.toDtoList(songService.searchSongs(searchSong)), HttpStatus.OK);
   }
 
   // Get a random song for the playlist switching
@@ -63,7 +64,8 @@ public class SongController {
   }
 
   @PutMapping(path = "{id}")
-  ResponseEntity<Object> updateSong(@PathVariable Integer id, @RequestBody SongRequestDto songRequestDto) {
+  ResponseEntity<Object> updateSong(
+      @PathVariable Integer id, @RequestBody SongRequestDto songRequestDto) {
     Songs song;
     try {
       song = songService.putSong(id, songRequestDto);

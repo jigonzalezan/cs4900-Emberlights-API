@@ -11,6 +11,12 @@
 ### Playlists Entity
 - Create Playlist
 
+### Songs Entity
+- Create Song
+
 ## PUT Methods
 ### Playlists Entity
 - Update a Playlist
+
+### Songs Entity
+- Put Song

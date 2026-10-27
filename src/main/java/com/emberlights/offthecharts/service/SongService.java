@@ -5,6 +5,7 @@ import com.emberlights.offthecharts.mapper.SongDtoMapper;
 import com.emberlights.offthecharts.mapper.SongRequestDtoMapper;
 import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.repository.SongRepository;
+import com.emberlights.offthecharts.repository.SongSpecifications;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Random;
@@ -29,8 +30,9 @@ public class SongService {
         .orElseThrow(() -> new EntityNotFoundException("Song (" + id + ") not found"));
   }
 
-  public List<Songs> searchSongs(String songName) {
-    return songRepository.findBySongNameContaining(songName);
+  public List<Songs> searchSongs(SongRequestDto searchCriteria) {
+    var spec = SongSpecifications.withCriteria(searchCriteria);
+    return songRepository.findAll(spec);
   }
 
   public Songs getRandomSongByGenre(String genreName) {

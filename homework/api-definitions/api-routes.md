@@ -3,9 +3,10 @@
 ### Songs Entity
 - All Songs
 - Song by songID
-- Song where songName is
+- Search for a Song by id, name, genreID, or songDuration
 
 - Random Song by Genre
+- Multiple Random Songs by Genre
 
 ## POST Methods
 ### Playlists Entity

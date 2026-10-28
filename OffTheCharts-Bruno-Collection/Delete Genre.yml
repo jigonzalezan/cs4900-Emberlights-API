@@ -1,0 +1,21 @@
+info:
+  name: Delete Genre
+  type: http
+  seq: 15
+
+http:
+  method: DELETE
+  url: "{{BASE_URL}}/genre/{{ID}}"
+  auth: inherit
+
+runtime:
+  variables:
+    - name: ID
+      value: "7"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

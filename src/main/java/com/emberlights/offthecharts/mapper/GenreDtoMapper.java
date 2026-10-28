@@ -15,4 +15,6 @@ public interface GenreDtoMapper {
   List<GenreDto> toDtoList(List<Genres> genreList) throws EntityNotFoundException;
 
   GenreDto toDto(Genres genres) throws EntityNotFoundException;
+
+  Genres toEntity(GenreDto genreDto);
 }

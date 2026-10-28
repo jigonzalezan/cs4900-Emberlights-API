@@ -10,9 +10,13 @@ This project serves as the API for Off-the-Charts, an app for creating and curat
 - Bruno (for testing API endpoints)
 
 ## How to Run the API
-- Ensure the database is running
+- Check that you are in the main branch
+  - Run `git branch` in the terminal to check
+- Start the Docker container for the `Off The Charts` database
   - [Database folder](db/)
-- Go to the Debug and Run tab in VS Code and run the MariaDB run configuration
+  - In the `db` folder, run `docker compose up -d`
+- Go to the `Run and Debug` tab in VS Code and run the MariaDB run configuration
+  - You can also press `F5` to run the configuration
 
 ## How to Test
 - Check supported endpoints

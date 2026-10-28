@@ -25,4 +25,20 @@ public class GenreService {
   public List<Genres> getGenreBySearch(String genreName) {
     return genresRepository.findByGenreNameContaining(genreName);
   }
+
+  public Genres createGenre(Genres genre) {
+    genre.setGenreID(null);
+    return genresRepository.save(genre);
+  }
+
+  public Genres updateGenre(Integer id, Genres genre) {
+    Genres existingGenre = getGenreById(id);
+    existingGenre.setGenreName(genre.getGenreName());
+    return genresRepository.save(existingGenre);
+  }
+
+  public void deleteGenre(Integer id) {
+    Genres genre = getGenreById(id);
+    genresRepository.delete(genre);
+  }
 }

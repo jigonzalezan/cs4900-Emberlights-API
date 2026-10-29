@@ -77,9 +77,9 @@ public class SongController {
     Songs song;
     try {
       song = songService.putSong(id, songRequestDto);
+      return new ResponseEntity<>(song, HttpStatus.OK);
     } catch (EntityNotFoundException e) {
       return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
     }
-    return new ResponseEntity<>(song, HttpStatus.OK);
   }
 }

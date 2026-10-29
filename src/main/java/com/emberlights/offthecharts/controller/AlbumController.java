@@ -2,7 +2,6 @@ package com.emberlights.offthecharts.controller;
 
 import com.emberlights.offthecharts.dto.AlbumDto;
 import com.emberlights.offthecharts.mapper.AlbumDtoMapper;
-import com.emberlights.offthecharts.model.Albums;
 import com.emberlights.offthecharts.service.AlbumService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -46,17 +45,13 @@ public class AlbumController {
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<Object> createAlbum(@RequestBody AlbumDto albumRequestDto) {
-    Albums album;
-    album = albumService.createAlbum(albumRequestDto);
-    return new ResponseEntity<>(album, HttpStatus.CREATED);
+    return new ResponseEntity<>(albumService.createAlbum(albumRequestDto), HttpStatus.CREATED);
   }
 
   @PutMapping(path = {"{id}"})
   ResponseEntity<Object> updateAlbum(
       @PathVariable Integer id, @RequestBody AlbumDto albumRequestBody) {
-    Albums album;
-    Albums updatedAlbum = albumDtoMapper.toEntity(albumRequestBody);
-    album = albumService.updateAlbum(id, updatedAlbum);
-    return new ResponseEntity<>(album, HttpStatus.OK);
+    return new ResponseEntity<>(
+        albumService.updateAlbum(id, albumDtoMapper.toEntity(albumRequestBody)), HttpStatus.OK);
   }
 }

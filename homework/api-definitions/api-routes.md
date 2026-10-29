@@ -11,7 +11,12 @@
 ### Genres Entity
 - Get all Genres 
 - Get Genre by ID 
-- Search Genre by Name 
+- Search Genre by Name
+
+- ### Playlists
+- Get All Playlists
+- Get Playlist By ID
+- Search for Playlists
 
 ## POST Methods
 ### Playlists Entity

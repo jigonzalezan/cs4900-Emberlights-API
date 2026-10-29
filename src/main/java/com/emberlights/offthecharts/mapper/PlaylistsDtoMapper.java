@@ -7,8 +7,8 @@ import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 @Mapper(
     componentModel = "spring",

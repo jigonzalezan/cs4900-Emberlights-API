@@ -1,5 +1,6 @@
 package com.emberlights.offthecharts.service;
 
+import com.emberlights.offthecharts.dto.SongDto;
 import com.emberlights.offthecharts.dto.SongRequestDto;
 import com.emberlights.offthecharts.mapper.SongDtoMapper;
 import com.emberlights.offthecharts.mapper.SongRequestDtoMapper;
@@ -64,10 +65,13 @@ public class SongService {
     return songRepository.saveAndFlush(songRequestDtoMapper.toEntity(songRequestDto));
   }
 
-  public Songs putSong(Integer id, SongRequestDto songRequestDto) {
+  public SongDto putSong(Integer id, SongRequestDto songRequestDto) {
     Songs song = songRepository
         .findById(id)
         .orElseThrow(() -> new EntityNotFoundException("Work Order (" + ") not found"));
-    return songRepository.saveAndFlush(songRequestDtoMapper.updateEntity(songRequestDto, song));
+    Songs updatedSong =
+        songRepository.saveAndFlush(songRequestDtoMapper.updateEntity(songRequestDto, song));
+
+    return songDtoMapper.toDto(updatedSong);
   }
 }

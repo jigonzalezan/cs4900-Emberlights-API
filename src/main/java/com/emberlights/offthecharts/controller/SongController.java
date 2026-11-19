@@ -73,7 +73,7 @@ public class SongController {
   @PutMapping(path = "{id}")
   ResponseEntity<Object> updateSong(
       @PathVariable Integer id, @RequestBody SongRequestDto songRequestDto) {
-    Songs song;
+    SongDto song;
     try {
       song = songService.putSong(id, songRequestDto);
       return new ResponseEntity<>(song, HttpStatus.OK);

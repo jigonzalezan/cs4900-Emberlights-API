@@ -34,13 +34,13 @@ public class GenreController {
   }
 
   @GetMapping(path = "{id}")
-  ResponseEntity<GenreDto> getGenreById(@PathVariable int id) {
+  ResponseEntity<GenreDto> getGenreById(@PathVariable("id") int id) {
     return new ResponseEntity<>(genreDtoMapper.toDto(genreService.getGenreById(id)), HttpStatus.OK);
   }
 
   @GetMapping(path = "search")
   ResponseEntity<List<GenreDto>> searchGenreByName(
-      @RequestParam(required = false) String genreName) {
+      @RequestParam(name = "genreName", required = false) String genreName) {
     return new ResponseEntity<>(
         genreDtoMapper.toDtoList(genreService.getGenreBySearch(genreName)), HttpStatus.OK);
   }
@@ -55,7 +55,7 @@ public class GenreController {
 
   @PutMapping(path = "{id}")
   public ResponseEntity<GenreDto> updateGenre(
-      @PathVariable Integer id, @RequestBody GenreDto genreDto) {
+      @PathVariable("id") Integer id, @RequestBody GenreDto genreDto) {
 
     Genres genre = genreDtoMapper.toEntity(genreDto);
     Genres updatedGenre = genreService.updateGenre(id, genre);
@@ -64,7 +64,7 @@ public class GenreController {
   }
 
   @DeleteMapping(path = "{id}")
-  public ResponseEntity<Void> deleteGenre(@PathVariable Integer id) {
+  public ResponseEntity<Void> deleteGenre(@PathVariable("id") Integer id) {
     genreService.deleteGenre(id);
     return ResponseEntity.noContent().build();
   }

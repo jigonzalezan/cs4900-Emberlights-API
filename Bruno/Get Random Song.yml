@@ -5,10 +5,10 @@ info:
 
 http:
   method: GET
-  url: '{{BASE_URL}}/song/random?genreName="Folk"'
+  url: "{{BASE_URL}}/song/random?genreName=Folk"
   params:
     - name: genreName
-      value: '"Folk"'
+      value: Folk
       type: query
   auth: inherit
 

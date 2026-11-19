@@ -38,9 +38,8 @@ public class SongController {
     return new ResponseEntity<>(songDtoMapper.toDto(songService.getSongById(id)), HttpStatus.OK);
   }
 
-  @GetMapping(path = "search")
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<List<SongDto>> searchSongByName(@RequestBody SongRequestDto searchSong) {
+  @PostMapping(path = "search", consumes = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<List<SongDto>> searchSong(@RequestBody SongRequestDto searchSong) {
     return new ResponseEntity<>(
         songDtoMapper.toDtoList(songService.searchSongs(searchSong)), HttpStatus.OK);
   }

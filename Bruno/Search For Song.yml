@@ -4,7 +4,7 @@ info:
   seq: 6
 
 http:
-  method: GET
+  method: POST
   url: "{{BASE_URL}}/song/search"
   body:
     type: json
@@ -12,7 +12,7 @@ http:
       {
         "songID": "",
         "songName": "Bones",
-        "genreID": 4,
+        "genreID": "",
         "songDuration": "",
         "albumID": ""
       }

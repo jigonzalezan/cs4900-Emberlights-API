@@ -1,7 +1,9 @@
 package com.emberlights.offthecharts.service;
 
 import com.emberlights.offthecharts.dto.PlaylistsDto;
+import com.emberlights.offthecharts.dto.PlaylistsRequestDto;
 import com.emberlights.offthecharts.mapper.PlaylistsDtoMapper;
+import com.emberlights.offthecharts.mapper.PlaylistsRequestDtoMapper;
 import com.emberlights.offthecharts.model.Playlists;
 import com.emberlights.offthecharts.repository.PlaylistsRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class PlaylistsService {
   private final PlaylistsRepository playlistsRepository;
   private final PlaylistsDtoMapper playlistsDtoMapper;
+  private final PlaylistsRequestDtoMapper playlistsRequestDtoMapper;
 
   public List<Playlists> getAllPlaylists() {
     return playlistsRepository.findAll();
@@ -33,11 +36,13 @@ public class PlaylistsService {
     return playlistsRepository.saveAndFlush(playlistsDtoMapper.toEntity(playlistsDto));
   }
 
-  public Playlists putPlaylists(Integer id, PlaylistsDto playlistsDto) {
+  public PlaylistsDto putPlaylists(Integer id, PlaylistsRequestDto playlistsRequestDto) {
     Playlists playlists = playlistsRepository
         .findById(id)
         .orElseThrow(() -> new EntityNotFoundException("Playlist (" + ") not found"));
-    return playlistsRepository.saveAndFlush(
-        playlistsDtoMapper.updateEntity(playlistsDto, playlists));
+    Playlists updatePlaylists = playlistsRepository.saveAndFlush(
+        playlistsRequestDtoMapper.updateEntity(playlistsRequestDto, playlists));
+
+    return playlistsDtoMapper.toDto(updatePlaylists);
   }
 }

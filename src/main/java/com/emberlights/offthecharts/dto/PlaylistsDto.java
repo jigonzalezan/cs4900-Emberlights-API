@@ -1,13 +1,15 @@
 package com.emberlights.offthecharts.dto;
 
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Value;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
-@Value
+@NoArgsConstructor
+@AllArgsConstructor
 public class PlaylistsDto {
   Integer playlistID;
   String playlistName;

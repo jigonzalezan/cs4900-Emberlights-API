@@ -1,6 +1,7 @@
 package com.emberlights.offthecharts.controller;
 
 import com.emberlights.offthecharts.dto.PlaylistsDto;
+import com.emberlights.offthecharts.dto.PlaylistsRequestDto;
 import com.emberlights.offthecharts.mapper.PlaylistsDtoMapper;
 import com.emberlights.offthecharts.model.Playlists;
 import com.emberlights.offthecharts.service.PlaylistsService;
@@ -41,7 +42,7 @@ public class PlaylistsController {
 
   @GetMapping(path = "search")
   ResponseEntity<List<PlaylistsDto>> searchSongByName(
-      @RequestParam(required = false) String playlistName) {
+      @RequestParam(name = "playlistName", required = false) String playlistName) {
     return new ResponseEntity<>(
         playlistDtoMapper.toDtoList(playlistService.getPlaylistBySearch(playlistName)),
         HttpStatus.OK);
@@ -60,10 +61,10 @@ public class PlaylistsController {
 
   @PutMapping(path = "{id}")
   ResponseEntity<Object> updatePlaylist(
-      @PathVariable Integer id, @RequestBody PlaylistsDto playlistsDto) {
-    Playlists playlists;
+      @PathVariable("id") Integer id, @RequestBody PlaylistsRequestDto playlistsRequestDto) {
+    PlaylistsDto playlists;
     try {
-      playlists = playlistService.putPlaylists(id, playlistsDto);
+      playlists = playlistService.putPlaylists(id, playlistsRequestDto);
     } catch (EntityNotFoundException e) {
       return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
     }

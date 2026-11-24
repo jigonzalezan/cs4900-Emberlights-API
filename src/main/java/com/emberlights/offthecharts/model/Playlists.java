@@ -1,5 +1,6 @@
 package com.emberlights.offthecharts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Data
 @Entity
@@ -26,6 +28,7 @@ public class Playlists {
   @Column(name = "playlistName", length = 50, nullable = false)
   String playlistName;
 
+  @CreationTimestamp
   @Column(name = "creationTime", insertable = false, updatable = false)
   LocalDateTime creationTime;
 
@@ -36,6 +39,12 @@ public class Playlists {
   @JoinColumn(name = "genreID", nullable = false, referencedColumnName = "genreID")
   Genres genres;
 
+  @JsonIgnoreProperties("playlist")
   @ManyToMany(mappedBy = "playlist")
   List<Songs> songs;
+
+  public void addSong(Songs song) {
+    this.songs.add(song);
+    song.getPlaylist().add(this);
+  }
 }

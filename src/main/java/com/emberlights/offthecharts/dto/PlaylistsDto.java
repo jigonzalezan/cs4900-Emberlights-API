@@ -15,5 +15,6 @@ public class PlaylistsDto {
   String playlistName;
   GenreDto genres;
   LocalDateTime creationTime;
+  SongDto[] songs;
   Integer numberSongs;
 }

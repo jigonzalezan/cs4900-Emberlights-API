@@ -4,9 +4,13 @@ import com.emberlights.offthecharts.dto.PlaylistsDto;
 import com.emberlights.offthecharts.dto.PlaylistsRequestDto;
 import com.emberlights.offthecharts.mapper.PlaylistsDtoMapper;
 import com.emberlights.offthecharts.mapper.PlaylistsRequestDtoMapper;
+import com.emberlights.offthecharts.mapper.SongDtoMapper;
+import com.emberlights.offthecharts.model.Genres;
 import com.emberlights.offthecharts.model.Playlists;
+import com.emberlights.offthecharts.model.Songs;
 import com.emberlights.offthecharts.repository.PlaylistsRepository;
 import jakarta.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +21,10 @@ public class PlaylistsService {
   private final PlaylistsRepository playlistsRepository;
   private final PlaylistsDtoMapper playlistsDtoMapper;
   private final PlaylistsRequestDtoMapper playlistsRequestDtoMapper;
+
+  private final SongService songService;
+  private final GenreService genreService;
+  private final SongDtoMapper songDtoMapper;
 
   public List<Playlists> getAllPlaylists() {
     return playlistsRepository.findAll();
@@ -32,8 +40,24 @@ public class PlaylistsService {
     return playlistsRepository.findByPlaylistNameContaining(playlistName);
   }
 
-  public Playlists createPlaylists(PlaylistsDto playlistsDto) throws EntityNotFoundException {
-    return playlistsRepository.saveAndFlush(playlistsDtoMapper.toEntity(playlistsDto));
+  public Playlists createPlaylists(PlaylistsRequestDto playlistsDto)
+      throws EntityNotFoundException {
+    // Get the genre name
+    Genres genre = genreService.getGenreById(playlistsDto.getGenreID());
+
+    // Get random songs
+    List<Songs> randomSongs =
+        songService.getMultiRandomSongsByGenre(genre.getGenreName(), playlistsDto.getNumberSongs());
+
+    Playlists playlists = playlistsRequestDtoMapper.toEntity(playlistsDto);
+    playlists.setGenres(genre);
+    playlists.setSongs(new ArrayList<>());
+
+    for (Songs song : randomSongs) {
+      playlists.addSong(song);
+    }
+
+    return playlistsRepository.saveAndFlush(playlists);
   }
 
   public PlaylistsDto putPlaylists(Integer id, PlaylistsRequestDto playlistsRequestDto) {

@@ -15,7 +15,7 @@ import org.mapstruct.MappingTarget;
 public interface PlaylistsRequestDtoMapper {
   @Mapping(target = "playlistID", ignore = true)
   @Mapping(source = "genreID", target = "genres")
-  @Mapping(target = "songs", ignore = true)
+  @Mapping(source = "songs", target = "songs")
   Playlists toEntity(PlaylistsRequestDto playlistsRequestDto) throws EntityNotFoundException;
 
   @InheritConfiguration

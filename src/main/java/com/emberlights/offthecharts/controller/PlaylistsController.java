@@ -49,7 +49,7 @@ public class PlaylistsController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<Object> createPlaylist(@RequestBody PlaylistsDto playlistsDto) {
+  ResponseEntity<Object> createPlaylist(@RequestBody PlaylistsRequestDto playlistsDto) {
     Playlists playlists;
     try {
       playlists = playlistService.createPlaylists(playlistsDto);

@@ -8,7 +8,6 @@
 
 - Random Song by Genre
 - Multiple Random Songs by Genre
-- Random Song excluding certain songs
 
 ### Genres Entity
 - Get all Genres 

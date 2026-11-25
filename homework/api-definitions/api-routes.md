@@ -4,9 +4,11 @@
 - All Songs
 - Song by songID
 - Search for a Song by id, name, genreID, or songDuration
+- Get Songs by Playlist ID
 
 - Random Song by Genre
 - Multiple Random Songs by Genre
+- Random Song excluding certain songs
 
 ### Genres Entity
 - Get all Genres 
@@ -31,6 +33,7 @@
 ## PUT Methods
 ### Playlists Entity
 - Update a Playlist
+- Rerandomize a Playlist Song
 
 ### Songs Entity
 - Put Song

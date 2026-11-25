@@ -11,10 +11,7 @@ http:
     data: |2-
         {
           "playlistName": "Ultimate Rock Mix the Sequel",
-          "genres": {
-            "genreID": 1,
-            "genreName": "Rock"
-          },
+          "genreID": 1,
           "numberSongs": 10
         }
   auth: inherit

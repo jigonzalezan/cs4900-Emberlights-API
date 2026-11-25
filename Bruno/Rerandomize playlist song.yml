@@ -1,0 +1,23 @@
+info:
+  name: Rerandomize playlist song
+  type: http
+  seq: 25
+
+http:
+  method: PUT
+  url: "{{BASE_URL}}/playlist/:playlistID/songs/:songID/rerandomize"
+  params:
+    - name: playlistID
+      value: "1"
+      type: path
+    - name: songID
+      value: "7"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

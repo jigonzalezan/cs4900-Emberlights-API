@@ -12,4 +12,6 @@ public interface SongRepository
   List<Songs> findBySongNameContaining(String songName);
 
   List<Songs> findByGenreGenreName(String genreName);
+
+  List<Songs> findByPlaylist_PlaylistID(Integer playlistId);
 }

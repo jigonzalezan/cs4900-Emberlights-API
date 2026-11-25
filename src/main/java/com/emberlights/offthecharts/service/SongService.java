@@ -80,4 +80,8 @@ public class SongService {
 
     return songDtoMapper.toDto(updatedSong);
   }
+
+  public List<SongDto> getSongsByPlaylistId(Integer playlistId) {
+    return songDtoMapper.toDtoList(songRepository.findByPlaylist_PlaylistID(playlistId));
+  }
 }

@@ -3,7 +3,6 @@ package com.emberlights.offthecharts.controller;
 import com.emberlights.offthecharts.dto.PlaylistsDto;
 import com.emberlights.offthecharts.dto.PlaylistsRequestDto;
 import com.emberlights.offthecharts.mapper.PlaylistsDtoMapper;
-import com.emberlights.offthecharts.model.Playlists;
 import com.emberlights.offthecharts.service.PlaylistsService;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
@@ -50,7 +49,7 @@ public class PlaylistsController {
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<Object> createPlaylist(@RequestBody PlaylistsRequestDto playlistsDto) {
-    Playlists playlists;
+    PlaylistsDto playlists;
     try {
       playlists = playlistService.createPlaylists(playlistsDto);
     } catch (EntityNotFoundException e) {

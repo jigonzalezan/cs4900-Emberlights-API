@@ -81,4 +81,9 @@ public class SongController {
       return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
     }
   }
+
+  @GetMapping("/playlist/{playlistId}")
+  public ResponseEntity<List<SongDto>> getSongsByPlaylist(@PathVariable Integer playlistId) {
+    return new ResponseEntity<>(songService.getSongsByPlaylistId(playlistId), HttpStatus.OK);
+  }
 }

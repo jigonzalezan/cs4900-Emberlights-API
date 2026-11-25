@@ -40,7 +40,7 @@ public class PlaylistsService {
     return playlistsRepository.findByPlaylistNameContaining(playlistName);
   }
 
-  public Playlists createPlaylists(PlaylistsRequestDto playlistsDto)
+  public PlaylistsDto createPlaylists(PlaylistsRequestDto playlistsDto)
       throws EntityNotFoundException {
     // Get the genre name
     Genres genre = genreService.getGenreById(playlistsDto.getGenreID());
@@ -53,17 +53,20 @@ public class PlaylistsService {
     playlists.setGenres(genre);
     playlists.setSongs(new ArrayList<>());
 
+    if (randomSongs.size() != playlistsDto.getNumberSongs())
+      throw new IllegalStateException("Cannot populate playlist");
+
     for (Songs song : randomSongs) {
       playlists.addSong(song);
     }
 
-    return playlistsRepository.saveAndFlush(playlists);
+    return playlistsDtoMapper.toDto(playlistsRepository.saveAndFlush(playlists));
   }
 
   public PlaylistsDto putPlaylists(Integer id, PlaylistsRequestDto playlistsRequestDto) {
     Playlists playlists = playlistsRepository
         .findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("Playlist (" + ") not found"));
+        .orElseThrow(() -> new EntityNotFoundException("Playlist (" + id + ") not found"));
     Playlists updatePlaylists = playlistsRepository.saveAndFlush(
         playlistsRequestDtoMapper.updateEntity(playlistsRequestDto, playlists));
 

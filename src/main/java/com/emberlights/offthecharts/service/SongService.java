@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,22 @@ public class SongService {
 
     int count = Math.min(num, shuffledSongs.size());
     return new ArrayList<>(shuffledSongs.subList(0, count));
+  }
+
+  public Songs getRandomSongByGenreExcluding(String genreName, Set<Integer> excludedSongIds) {
+    List<Songs> allSongs = songRepository.findByGenreGenreName(genreName);
+
+    List<Songs> availableSongs = allSongs.stream()
+        .filter(song -> !excludedSongIds.contains(song.getSongID()))
+        .toList();
+
+    if (availableSongs.isEmpty()) {
+      throw new IllegalStateException(
+          "No other unique songs available in genre '" + genreName + "' to replace this song");
+    }
+
+    int randomIndex = new Random().nextInt(availableSongs.size());
+    return availableSongs.get(randomIndex);
   }
 
   public Songs createSong(SongRequestDto songRequestDto) throws EntityNotFoundException {

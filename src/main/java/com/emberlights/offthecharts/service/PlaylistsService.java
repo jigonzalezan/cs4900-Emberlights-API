@@ -12,6 +12,8 @@ import com.emberlights.offthecharts.repository.PlaylistsRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -71,5 +73,28 @@ public class PlaylistsService {
         playlistsRequestDtoMapper.updateEntity(playlistsRequestDto, playlists));
 
     return playlistsDtoMapper.toDto(updatePlaylists);
+  }
+
+  public PlaylistsDto rerandomizeSongInPlaylist(Integer playlistId, Integer oldSongId)
+      throws EntityNotFoundException {
+    Playlists playlist = getPlaylistsById(playlistId);
+
+    Songs songToRemove = playlist.getSongs().stream()
+        .filter(s -> s.getSongID().equals(oldSongId))
+        .findFirst()
+        .orElseThrow(() -> new EntityNotFoundException(
+            "Song (" + oldSongId + ") not found in playlist (" + playlistId + ")"));
+
+    Set<Integer> currentSongIds =
+        playlist.getSongs().stream().map(Songs::getSongID).collect(Collectors.toSet());
+
+    String genreName = playlist.getGenres().getGenreName();
+    Songs replacementSong = songService.getRandomSongByGenreExcluding(genreName, currentSongIds);
+
+    playlist.getSongs().remove(songToRemove);
+    songToRemove.getPlaylist().remove(playlist);
+    playlist.addSong(replacementSong);
+
+    return playlistsDtoMapper.toDto(playlistsRepository.saveAndFlush(playlist));
   }
 }

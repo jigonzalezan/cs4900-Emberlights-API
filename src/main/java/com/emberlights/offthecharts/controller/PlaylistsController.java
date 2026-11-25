@@ -69,4 +69,11 @@ public class PlaylistsController {
     }
     return new ResponseEntity<>(playlists, HttpStatus.OK);
   }
+
+  @PutMapping("/{playlistId}/songs/{songId}/rerandomize")
+  public ResponseEntity<PlaylistsDto> rerandomizeSong(
+      @PathVariable Integer playlistId, @PathVariable Integer songId) {
+    return new ResponseEntity<>(
+        playlistService.rerandomizeSongInPlaylist(playlistId, songId), HttpStatus.OK);
+  }
 }
